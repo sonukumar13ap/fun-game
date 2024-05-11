@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Just Say I Love You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
+ <style>
+    *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f06292;
+    width: 100%;
+}
+
+.falling-text {
+  position: absolute;
+  font-size: 24px;
+  color: transparent;
+  text-shadow:  .3px .3px .6px #c24f76, -.3px -.3px .6px #ff75ae;
+}
+
+ .random-text {
+        position: absolute;
+        font-size: 24px;
+        z-index: -1;
+    }
+
+
+.container{
+  width: 330px;
+  height: 500px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 23px;
+  box-shadow:  5px 5px 10px #c24f76,
+             -5px -5px 10px #ff75ae;
+  
+}
+
+.container h2{
+  position: absolute;
+  text-shadow:  .3px .3px .6px #c24f76,
+             -.3px -.3px .6px #ff75ae;
+ color: transparent;
+transition: .2s;
+}
+
+.container button{
+  padding: 5px 10px;
+  width: 70px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  box-shadow: inset 5px 5px 10px #c24f76, inset -5px -5px 10px #ff75ae;
+  text-shadow:  .3px .3px .6px #c24f76, -.3px -.3px .6px #ff75ae;
+  color: transparent;
+  position: absolute;
+  top: 110px;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a{
+  text-decoration: none;
+  text-shadow:  .3px .3px .6px #c24f76, -.3px -.3px .6px #ff75ae;
+  color: transparent;
+  font-size: 20px;
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+}
+
+#qws{
+  top: 40px;
+  transition: .4s ease-out;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#res{
+  top: -100px;
+  transition: .4s ease-in;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  z-index: 1;
+  box-shadow: inset 5px 5px 10px #c24f76, inset -5px -5px 10px #ff75ae;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background: #f06292;
+  font-size: 25px;
+  width: 300px;
+  text-align: center;
+}
+
+#yes{
+  left: 80px;
+  transition: .4s ease-out;
+}
+
+#no{
+  right: 80px;
+  transition: .4s ease-out;
+}
+
+#link{
+  bottom: 15px;
+  transition: .4s ease-in;
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+  </style>
+</head>
+<body>
+  
+  <div class="container" id="container">
+    <h2 id="qws">Do you love me ?</h2>
+    <h2 id="res">I love you too ❤️❤️</h2>
+      <button type="button" id="yes">Yes</button>
+      <button type="button" id="no">No</button>
+      
+      <a id="link" href="https://www.instagram.com/sonukumar13ap">@sonukumar13ap</a>
+    </div>
+  
+  <script>
+var qws = document.getElementById('qws');
+var yes = document.getElementById('yes');
+var no = document.getElementById('no');
+var res = document.getElementById('res');
+var link = document.getElementById('link');
+
+var pre = new Audio('audio/pre.mp3');
+var post = new Audio('audio/post.mp3');
+
+rand_rgt = 0;
+rand_top = 0;
+
+no.addEventListener('click', () => {
+  var rand_top =151 + Math.floor(Math.random() * 280);
+var rand_rgt =16 + Math.floor(Math.random() * 230);
+  
+  no.style.top = rand_top + 'px';
+  no.style.right = rand_rgt + 'px';
+  pre.loop = true;
+  pre.play();
+});
+
+yes.addEventListener('click', () => {
+  qws.style.top = '-100px';
+  yes.style.left = '-100px';
+  no.style.right = '-100px';
+  pre.pause();
+  post.loop = true;
+  post.play();
+  
+  setTimeout(() => {
+  post.loop = false;
+},15000);
+  
+ 
+ setTimeout(() => {
+   
+    var emojii = '❤️✨❤️⭐❤️';
+    var words = emojii.split('');
+    var number = 50;
+    var textElements = [];
+
+    function getRandomPosition() {
+        var x = window.innerWidth * Math.random() - 50;
+        var y = window.innerHeight * Math.random() - 50;
+        var ran = 360 * Math.random();
+        return [x, y, ran];
+    }
+
+    function updateTextPositions() {
+        textElements.forEach(function(textElement) {
+            var position = getRandomPosition();
+            textElement.style.left = position[0] + 'px';
+            textElement.style.top = position[1] + 'px';
+            textElement.style.transform = `rotateZ(${position[2]}deg)`;
+        });
+    }
+
+    function createRandomText() {
+        var randomIndex = Math.floor(Math.random() * words.length);
+        var text = words[randomIndex];
+        var position = getRandomPosition();
+        var newText = document.createElement('div');
+        newText.textContent = text;
+        newText.classList.add('random-text');
+        newText.style.left = position[0] + 'px';
+        newText.style.top = position[1] + 'px';
+        document.body.appendChild(newText);
+        textElements.push(newText);
+    }
+
+    // Call createRandomText function multiple times to display multiple random words
+    for (var i = 0; i < number; i++) {
+        createRandomText();
+    }
+
+    // Update text positions every second
+    setInterval(updateTextPositions, 1000);
+   
+ }, 1000);
+  
+  setTimeout(() => {
+   res.style.top = '210px';
+   link.style.bottom = '160px';
+   
+   
+  
+const emoji = '❤️✨❤️⭐❤️';
+const words = emoji.split('');
+const textElements = [];
+const numWords = 50; // Number of falling text elements
+
+const friction = 0.95; // Friction coefficient
+const collisionThreshold = 20; // Collision threshold
+const initialVelocity = 1; // Initial velocity
+const gravity = 0.1; // Gravity
+const bounceFactor = 0.6; // Bounce factor
+
+// Create falling text elements and initialize positions and velocities
+for (let i = 0; i < numWords; i++) {
+  const textElement = document.createElement('div');
+  textElement.classList.add('falling-text');
+  textElement.textContent = words[Math.floor(Math.random() * words.length)];
+  document.getElementById('container').appendChild(textElement);
+  textElements.push(textElement);
+
+  const posX = Math.random() * 330;
+  const posY = -Math.random() * 1500;
+  const velocityX = Math.random() * 2 - 1; // Random value between -1 and 1
+  const velocityY = initialVelocity; // Constant initial velocity
+  const rotationZ = Math.random() * 360; // Random rotation angle for x axis
+  textElement.style.left = posX + 'px';
+  textElement.style.top = posY + 'px';
+  textElement.style.transform = `rotateZ(${rotationZ}deg)`;
+
+  // Store initial positions and velocities
+  textElement.dataset.posX = posX;
+  textElement.dataset.posY = posY;
+  textElement.dataset.velocityX = velocityX;
+  textElement.dataset.velocityY = velocityY;
+}
+
+function update() {
+  textElements.forEach(textElement => {
+    let posX = parseFloat(textElement.dataset.posX);
+    let posY = parseFloat(textElement.dataset.posY);
+    let velocityX = parseFloat(textElement.dataset.velocityX);
+    let velocityY = parseFloat(textElement.dataset.velocityY);
+
+    posX += velocityX;
+    posY += velocityY;
+    velocityX *= friction;
+    velocityY += gravity;
+
+    // Collision detection with window edges
+    if (posX < 0 || posX > window.innerWidth) {
+      velocityX *= -bounceFactor; // Reverse and reduce velocity on X axis
+    }
+    if (posY > 500) {
+      // Reset text position and velocity if it goes below the window
+      posX = Math.random() * 330;
+      posY = -50;
+      velocityX = Math.random() * 2 - 1; // Random value between -1 and 1
+      velocityY = initialVelocity; // Reset velocity to initial value
+    }
+
+    textElement.style.left = posX + 'px';
+    textElement.style.top = posY + 'px';
+
+    // Update dataset attributes with new positions and velocities
+    textElement.dataset.posX = posX;
+    textElement.dataset.posY = posY;
+    textElement.dataset.velocityX = velocityX;
+    textElement.dataset.velocityY = velocityY;
+  });
+
+  requestAnimationFrame(update);
+}
+
+update();
+   
+   
+  }, 400);
+});
+
+
+  </script>
+  
+
+</body>
+</html>
