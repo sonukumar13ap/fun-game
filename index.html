@@ -211,6 +211,7 @@ yes.addEventListener('click', () => {
         newText.classList.add('random-text');
         newText.style.left = position[0] + 'px';
         newText.style.top = position[1] + 'px';
+        textElement.style.transform = `rotateZ(${position[2]}deg)`;
         document.body.appendChild(newText);
         textElements.push(newText);
     }
